@@ -14,17 +14,17 @@ from porepy.examples.geothermal_flow.vtk_sampler import VTKSampler
 from porepy.examples.geothermal_flow.data_extractor_util import *
 
 # Geometry description
-from model_configuration.geometry_description.geometry_market import SimpleGeometryHorizontal as ModelGeometry
+from porepy.examples.geothermal_flow.model_configuration.geometry_description.geometry_market import SimpleGeometryHorizontal as ModelGeometry
 
 # Boundary & Initial Conditions
-from model_configuration.bc_description.bc_market import (
+from porepy.examples.geothermal_flow.model_configuration.bc_description.bc_market import (
     BCSinglePhaseHighPressure, 
     BCSinglePhaseModeratePressure, 
     BCSinglePhaseLowPressure,
     BCTwoPhaseHighPressure, 
     BCTwoPhaseLowPressure
 )
-from model_configuration.ic_description.ic_market import (
+from porepy.examples.geothermal_flow.model_configuration.ic_description.ic_market import (
     ICSinglePhaseHighPressure, 
     ICSinglePhaseModeratePressure, 
     ICSinglePhaseLowPressure,
@@ -103,7 +103,7 @@ def create_dynamic_model(BC, IC, FlowModel):
 def run_simulation(
     case_name : str,
     config : dict[str, any],
-    file_prefix : str
+    correl_vtk_phz : str
 ):
 
     """Run a geothermal simulation based on the provided configuration."""
@@ -140,15 +140,13 @@ def run_simulation(
     model = GeothermalModel(params)
 
     # Load VTK files
-    file_name_phz = file_prefix
-    # file_name_ptz = "model_configuration/constitutive_description/driesner_vtk_files/XTP_l2_modified.vtk"
-    file_name_ptz = "/Users/michealoguntola/Desktop/MainPorepy/composite-flow-latest/porepy/src/porepy/examples/geothermal_flow/model_configuration/constitutive_description/driesner_vtk_files/" + "XTP_l2_modified.vtk"
+    correl_vtk_ptz = "/porepy/src/porepy/examples/geothermal_flow/model_configuration/constitutive_description/driesner_vtk_files/XTP_l2_modified.vtk"
 
-    brine_vtk_sampler_phz = VTKSampler(file_name_phz)
+    brine_vtk_sampler_phz = VTKSampler(correl_vtk_phz)
     brine_vtk_sampler_phz.conversion_factors = (1.0, 1.0e-3, 1.0e-5)
     model.vtk_sampler = brine_vtk_sampler_phz
 
-    brine_vtk_sampler_ptz = VTKSampler(file_name_ptz)
+    brine_vtk_sampler_ptz = VTKSampler(correl_vtk_ptz)
     brine_vtk_sampler_ptz.conversion_factors = (1.0, 1.0, 1.0e-5)  # (z,t,p)
     brine_vtk_sampler_ptz.translation_factors = (0.0, -273.15, 0.0)  # (z,t,p)
     model.vtk_sampler_ptz = brine_vtk_sampler_ptz
@@ -390,7 +388,7 @@ def run_simulation(
 
 
 # Run simulations based on configuration
-file_prefix = "model_configuration/constitutive_description/driesner_vtk_files/"
+file_prefix = "/porepy/src/porepy/examples/geothermal_flow/model_configuration/constitutive_description/driesner_vtk_files/"
 correl_vtk_phz_1 = f"{file_prefix}XHP_l2_original_sc.vtk"
 correl_vtk_phz_2 = f"{file_prefix}XHP_l2_original_all.vtk"
 for case_name, config in SIMULATION_CASES.items():
