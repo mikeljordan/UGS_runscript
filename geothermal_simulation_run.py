@@ -140,7 +140,7 @@ def run_simulation(
     model = GeothermalModel(params)
 
     # Load VTK files
-    correl_vtk_ptz = "/porepy/src/porepy/examples/geothermal_flow/model_configuration/constitutive_description/driesner_vtk_files/XTP_l2_modified.vtk"
+    correl_vtk_ptz = "/workdir/porepy/src/porepy/examples/geothermal_flow/model_configuration/constitutive_description/driesner_vtk_files/XTP_l2_modified.vtk"
 
     brine_vtk_sampler_phz = VTKSampler(correl_vtk_phz)
     brine_vtk_sampler_phz.conversion_factors = (1.0, 1.0e-3, 1.0e-5)
@@ -388,7 +388,7 @@ def run_simulation(
 
 
 # Run simulations based on configuration
-file_prefix = "/porepy/src/porepy/examples/geothermal_flow/model_configuration/constitutive_description/driesner_vtk_files/"
+file_prefix = "/workdir/porepy/src/porepy/examples/geothermal_flow/model_configuration/constitutive_description/driesner_vtk_files/"
 correl_vtk_phz_1 = f"{file_prefix}XHP_l2_original_sc.vtk"
 correl_vtk_phz_2 = f"{file_prefix}XHP_l2_original_all.vtk"
 for case_name, config in SIMULATION_CASES.items():
