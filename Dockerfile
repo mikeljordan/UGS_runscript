@@ -2,7 +2,7 @@
 FROM porepy/dev:latest
 
 # Install additional dependencies.
-RUN pip install --no-cache-dir pyamg pyvista
+RUN pip install --no-cache-dir pyamg pyvista chemicals
 
 # Install Git LFS to correctly fetch large files
 RUN apt-get update && apt-get install -y git-lfs && git lfs install
