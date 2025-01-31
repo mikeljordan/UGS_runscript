@@ -1,2 +1,3 @@
 # UGS_runscript
-This script sets up and runs geothermal flow simulations for different pressure and phase conditions using PorePy. It dynamically configures boundary and initial conditions, loads material properties, manages time-stepping, and extracts results for visualization and comparison with CSMP++ data.
+This repository contains runscripts for the numerical experiments that are reported in 
+Micheal Oguntola1,2, Omar Duran1, Veljko Lipovac1, Eirik Keilegavlen1 and Inga Berre1. A Unified Compositional Flow Model for Simulating Multiphase High-Enthalpy Geothermal Reservoirs.
